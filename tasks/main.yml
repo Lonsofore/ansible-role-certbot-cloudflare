@@ -8,9 +8,12 @@
     - curl
     - libffi-dev
     - libssl-dev
-    - python-apt
-    - python-dev
-    - python-pycurl
+
+- name: clone certbot repo
+  ansible.builtin.git:
+    repo: '{{ certbot_repo }}'
+    dest: '{{ certbot_dir }}'
+    version: '{{ certbot_repo_version }}'
 
 - name: check if certbot-dns-cloudflare plugin is installed
   shell: certbot plugins | grep dns-cloudflare
@@ -19,7 +22,7 @@
   changed_when: "cf_check is failed"
 
 - name: Install certbot-dns-cloudflare
-  shell: "cd {{certbot_dir}}/certbot-dns-cloudflare && python setup.py install"
+  shell: "cd {{certbot_dir}}/certbot-dns-cloudflare && python3 setup.py install"
   when: cf_check is failed
 
 - name: Create certbot folder - sudouser
@@ -44,3 +47,4 @@
 - name: Create Certs.
   include_role:
     name: geerlingguy.certbot
+

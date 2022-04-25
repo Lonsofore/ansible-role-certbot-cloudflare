@@ -26,6 +26,10 @@ Your Cloudflare Global API Key, optionally encryped `ansible-vault encrypt_strin
         domains:
           - *.example3.com
 
+You can also use a token:
+
+    certbot_cloudflare_api_token: ''
+
 The wildcard domain to create the cert for. For non-wildcard domains I recommend using [geerlingguy.certbot](https://github.com/geerlingguy/ansible-role-certbot)
 
     certbot_cloudflare_acme_server: "{{ certbot_cloudflare_acme_test }}"

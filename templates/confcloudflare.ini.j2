@@ -1,3 +1,7 @@
 # Cloudflare API credentials used by Certbot
-dns_cloudflare_email = {{certbot_cloudflare_email}}
-dns_cloudflare_api_key = {{certbot_cloudflare_api_key}}
+{% if certbot_cloudflare_api_key is defined and certbot_cloudflare_api_key|d('')|length > 0 %}
+dns_cloudflare_email = {{ certbot_cloudflare_email }}
+dns_cloudflare_api_key = {{ certbot_cloudflare_api_key }}
+{% else %}
+dns_cloudflare_api_token = {{ certbot_cloudflare_api_token }}
+{% endif %}
